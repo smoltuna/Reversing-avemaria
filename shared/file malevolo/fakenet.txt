@@ -1,0 +1,217 @@
+06/12/25 03:18:33 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:06 PM [          Diverter]   pid:  2108 name: svchost.exe
+06/12/25 03:23:06 PM [        DNS Server] Received A request for domain 'checkappexec.microsoft.com'.
+06/12/25 03:23:06 PM [        DNS Server] Responding with '192.0.2.123'
+06/12/25 03:23:08 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:10 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:13 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:13 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+06/12/25 03:23:13 PM [        DNS Server] Responding with '192.0.2.123'
+06/12/25 03:23:15 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:16 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:18 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:21 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:22 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:24 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:26 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:27 PM [          Diverter]   pid:  2108 name: svchost.exe
+06/12/25 03:23:27 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+06/12/25 03:23:27 PM [        DNS Server] Responding with '192.0.2.123'
+06/12/25 03:23:28 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:30 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+06/12/25 03:23:31 PM [          Diverter]   pid:  3276 name: msedge.exe
+06/12/25 03:23:31 PM [          Diverter]   pid:  3276 name: msedge.exe
+06/12/25 03:23:31 PM [        DNS Server] Received A request for domain 'config.edge.skype.com'.
+06/12/25 03:23:31 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:23:31 PM [        DNS Server] Error: QTYPE: Invalid forward lookup: [65]
+
+06/12/25 03:23:32 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:34 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:36 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:38 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:41 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:42 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:23:42 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:23:42 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:23:44 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:46 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:49 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:49 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:23:49 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:23:49 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:23:49 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:23:49 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:23:49 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:23:51 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:54 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:23:57 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:01 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:24:01 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:24:01 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:24:03 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:06 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:10 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:18 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:20 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:24:20 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:24:20 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:24:20 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:24:20 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:24:20 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:24:23 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:26 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:24:26 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:24:26 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:24:26 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:30 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:37 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:47 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:49 PM [          Diverter]   pid:  3276 name: msedge.exe
+
+06/12/25 03:24:49 PM [          Diverter]   pid:  3276 name: msedge.exe
+
+06/12/25 03:24:49 PM [        DNS Server] Received A request for domain 'edge.microsoft.com'.
+
+06/12/25 03:24:49 PM [        DNS Server] Error: QTYPE: Invalid forward lookup: [65]
+
+06/12/25 03:24:49 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:24:53 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:56 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:24:57 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:24:57 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:24:57 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:25:01 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:04 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:09 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:17 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:25 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:25:25 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:25:25 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:25:28 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:30 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:34 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:40 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:45 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:25:45 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:25:45 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:25:45 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:25:45 PM [        DNS Server] Received A request for domain 'wpad.univr.it'.
+
+06/12/25 03:25:45 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:25:46 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:25:46 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:25:46 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:49 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:52 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:25:57 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:04 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:26:04 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:26:04 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:26:06 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:08 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:11 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:18 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:25 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:26:25 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:26:25 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:26:27 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:30 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:34 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:42 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:51 PM [          Diverter]   pid:  2108 name: svchost.exe
+
+06/12/25 03:26:51 PM [        DNS Server] Received A request for domain 'tresor2020.ddns.net'.
+
+06/12/25 03:26:51 PM [        DNS Server] Responding with '192.0.2.123'
+
+06/12/25 03:26:55 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:26:58 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:27:03 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205
+
+06/12/25 03:27:14 PM [          Diverter] ICMP type 3 code 1 169.254.78.205->169.254.78.205

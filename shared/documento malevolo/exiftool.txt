@@ -1,0 +1,49 @@
+ExifTool Version Number         : 13.30
+File Name                       : 0006c72c0370486a98ee12c001b2b3c9
+Directory                       : C:/Users/malware/Desktop/maldoc-summer-25
+File Size                       : 104 kB
+Zone Identifier                 : Exists
+File Modification Date/Time     : 2025:06:13 23:34:55+02:00
+File Access Date/Time           : 2025:06:13 23:53:08+02:00
+File Creation Date/Time         : 2021:02:23 21:29:20+01:00
+File Permissions                : -rw-rw-rw-
+File Type                       : FPX
+File Type Extension             : fpx
+MIME Type                       : image/vnd.fpx
+Identification                  : Word 8.0
+Language Code                   : English (US)
+Doc Flags                       : Has picture, 1Table, ExtChar
+System                          : Windows
+Word 97                         : No
+Title                           : Vero.
+Subject                         : 
+Author                          : Mathilde Bernard
+Keywords                        : 
+Comments                        : 
+Template                        : Normal.dotm
+Last Modified By                : 
+Software                        : Microsoft Office Word
+Create Date                     : 2019:12:19 13:19:00
+Modify Date                     : 2019:12:19 13:19:00
+Security                        : None
+Code Page                       : Windows Latin 1 (Western European)
+Company                         : 
+Content Status                  : 
+Char Count With Spaces          : 55
+App Version                     : 16.0000
+Scale Crop                      : No
+Links Up To Date                : No
+Shared Doc                      : No
+Hyperlinks Changed              : No
+Title Of Parts                  : 
+Heading Pairs                   : Title, 1
+Comp Obj User Type Len          : 25
+Comp Obj User Type              : Microsoft Forms 2.0 Form
+Last Printed                    : 0000:00:00 00:00:00
+Revision Number                 : 1
+Total Edit Time                 : 0
+Words                           : 8
+Characters                      : 48
+Pages                           : 1
+Paragraphs                      : 1
+Lines                           : 1
