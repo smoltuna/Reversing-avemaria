@@ -1,177 +1,118 @@
-# Malware Simulation Analysis
+# AveMaria/Warzone Investigation Report
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=34&duration=3200&pause=900&color=00B894&center=true&vCenter=true&width=980&lines=Malware+Simulation+Investigation;Static+%2B+Dynamic+Analysis+Pipeline;From+Macro+Trigger+to+Runtime+Behavior" alt="Title banner" />
+  <img src="https://img.shields.io/badge/Family-AveMaria%20%2F%20Warzone-0B132B?style=for-the-badge" alt="family badge" />
+  <img src="https://img.shields.io/badge/Scope-Maldoc%20%2B%20RAT%20Payload-1C2541?style=for-the-badge" alt="scope badge" />
+  <img src="https://img.shields.io/badge/Method-Static%20%2B%20Dynamic%20%2B%20RE-005F73?style=for-the-badge" alt="method badge" />
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Analysis-Static%20%2B%20Dynamic-0B132B?style=for-the-badge&logo=hackaday&logoColor=white" alt="analysis badge" />
-  <img src="https://img.shields.io/badge/Focus-Macro%20Dropper%20%7C%20PE%20Behavior-1C2541?style=for-the-badge" alt="focus badge" />
-  <img src="https://img.shields.io/badge/License-MIT-2EC4B6?style=for-the-badge" alt="license badge" />
-</p>
-
----
+This README is a summary of the full report in [Codice_Malevolo-Report.pdf](Codice_Malevolo-Report.pdf).
 
 ## Overview
 
-This repository contains a complete malware-analysis case study built from both document-based and executable-based evidence.
+The analyzed sample is a Windows RAT associated with the AveMaria/Warzone family and is focused on information theft.
 
-The objective is to reconstruct the attack chain end-to-end:
+Main capabilities reported in the PDF:
 
-1. Initial malicious document behavior (macro stage).
-2. Payload retrieval and execution logic.
-3. Host and network behavior observed in a controlled environment.
-4. Detection artifacts (YARA and IOC extraction).
+- Credential theft from browsers and mail clients.
+- Keylogging with active-window context collection.
+- Remote desktop configuration abuse for attacker access.
+- C2 communication for command retrieval and data exfiltration.
 
-The dataset combines static reverse engineering, runtime telemetry, network captures, and registry/process deltas.
+The report also documents a malicious Office document acting as an obfuscated dropper that triggers PowerShell via WMI and launches a second-stage payload (637.exe).
 
----
+## Analysis Toolchain
 
-## Tech Stack And Tooling
+1. Static binary triage and packing assessment.
+Tools: Exeinfo, PEiD/PEinfo, PEStudio, Strings.
+Outcome: no known packer signature was detected, while section analysis still shows high .text entropy and executable-like content, consistent with a suspicious packed/dropper-like profile.
 
-### Languages / Formats
+<p align="center">
+  <img src="assets/pestudio.png" alt="PEStudio static triage" width="49%" />
+  <img src="assets/exeinfo.png" alt="Exeinfo metadata view" width="49%" />
+</p>
 
-- VBA macro code (inside malicious Office document)
-- PowerShell (deobfuscated downloader)
-- YARA rules
-- PCAP / PCAPNG network traces
-- CSV and TXT forensic exports
+2. Capability and IOC extraction.
+Tools: PEStudio imports/strings, YARA.
+Outcome: extracted indicators and behavior cues for registry modification, C2 communication, keylogging, credential theft, anti-analysis, and family markers (AveMaria/Warzone).
 
-### Analysis Toolchain
+3. Dynamic host behavior validation.
+Tools: Process Monitor, Process Explorer, Regshot, Autoruns.
+Outcome: observed registry and filesystem activity (including AppData staging paths and network-related registry changes), high internal thread activity, and no obvious child-process chain in this run.
 
-- ExifTool (document metadata)
-- OLETools / `olevba` (macro extraction and deobfuscation)
-- ViperMonkey (macro emulation)
-- IDA (disassembly and API/behavior mapping)
-- PEStudio (imports and suspicious strings)
-- FakeNet-NG (simulated network sinkhole)
-- Wireshark (packet-level inspection)
-- Process Explorer (process tree snapshot)
-- Process Monitor (filesystem/registry/runtime traces)
-- Regshot (registry delta)
-- Autoruns (persistence/autostart snapshot archive)
+<p align="center">
+  <img src="assets/process_monitor.png" alt="Process Monitor runtime events" width="68%" />
+</p>
 
----
+4. Network and C2 correlation.
+Tools: FakeNet, Wireshark, VirusTotal.
+Outcome: repeated DNS callbacks to tresor2020.ddns.net (svchost.exe context) and failed C2 session establishment in the lab (ICMP destination unreachable behavior).
 
-## Repository Structure And File-by-File Purpose
+<p align="center">
+  <img src="assets/fakenet.png" alt="FakeNet DNS and network callbacks" width="72%" />
+</p>
 
-### Root
+5. Reverse engineering of keylogging logic.
+Tools: IDA Freeware.
+Outcome: identified key translation routines, active window title capture, conditional title logging, and file-write behavior associated with log generation.
 
-- `Codice_Malevolo-Report.pdf`
-  - Final report document summarizing the analysis workflow and findings.
-- `LICENSE`
-  - MIT license.
+<p align="center">
+  <img src="assets/ida_keylogger.png" alt="IDA keylogger routine graph" width="72%" />
+</p>
 
-### `shared/documento malevolo/`
+6. Malicious document execution-chain reconstruction.
+Tools: ExifTool, oleid, oletimes, oledump.py, olevba, ViperMonkey, deobfuscated PowerShell analysis.
+Outcome: Document_open auto-exec, obfuscated string assembly of hidden PowerShell, WMI process creation via winmgmts:Win32_Process, and second-stage payload download/execution (637.exe).
 
-- `deobfuscated.ps1`
-  - Deobfuscated PowerShell downloader logic.
-  - Builds `%USERPROFILE%\637.exe`, iterates over multiple fallback URLs, downloads payload, checks minimum size (`>= 23512`), and executes it.
-- `exiftool.txt`
-  - Document metadata extraction.
-  - Indicates OLE/Word-style structure and macro-related clues (including "Microsoft Forms 2.0 Form").
-- `olevba.txt`
-  - Static macro extraction/deobfuscation output.
-  - Shows `Document_open` entry point, obfuscated VBA symbols, and split strings reassembling hidden PowerShell command fragments.
-- `VIPERMONKEY_ANALISI.txt`
-  - Macro emulation transcript.
-  - Confirms `document_open` execution path and records interesting calls (`GetObject`, `CreateObject`, `Create`).
-- `strings.txt`
-  - Raw strings dump of the malicious document.
-  - Useful for low-level indicator hunting and format/embedded-object fingerprints.
-- `rules.yar`
-  - Custom YARA detection rule matching the macro family through:
-    - Forms marker
-    - `Document_open` entry point
-    - Obfuscated symbol names
-    - Fragmented PowerShell signature parts
+<p align="center">
+  <img src="assets/owersheill%20-w%20hidden%20-en%20cmu.png" alt="Obfuscated PowerShell string fragments" width="46%" />
+</p>
 
-### `shared/file malevolo/`
+## Findings
 
-- `ida.txt`
-  - Disassembly export with API-level behavior evidence.
-  - Highlights network download and execution/persistence primitives, including `URLDownloadToFileW`, `RegOpenKeyEx*`, `RegCreateKeyEx*`, `RegSetValueEx*`, `WSAStartup`, and `cmd.exe` invocations.
-  - Contains embedded URL indicators (for example `http://5.206.225.104/dll/...`).
-- `pestudio imports.txt`
-  - API import catalog grouped by capability.
-  - Shows registry, network, process injection, threading, crypto, and execution-related functions.
-- `pestudio strings.txt`
-  - Suspicious string corpus.
-  - Includes command-line artifacts, URL indicators, Run-key path strings, DLL names, and anti-analysis/execution clues.
-- `procexplorer.txt`
-  - Process list snapshot from the dynamic session.
-  - Captures runtime context with active monitoring tools and system process landscape.
-- `procmon.CSV`
-  - Host event telemetry (file/registry/process operations).
-  - Provides granular event timeline for behavioral correlation during execution window.
-- `fakenet.txt`
-  - FakeNet-NG traffic log.
-  - Shows repeated DNS requests and beacon-like patterns to suspicious domains such as `tresor2020.ddns.net`.
-- `wireshark-capture.pcapng`
-  - Raw packet capture for deep network forensics.
-- `packets_20250612_143859 (fakenet).pcap`
-  - Packet capture associated with FakeNet session.
-- `wireshark.txt`
-  - Text export of packet-level observations.
-  - Useful for quick grep-able review without opening GUI tools.
-- `~res-x64.txt`
-  - Regshot diff output (registry deltas before/after execution window).
-- `DESKTOP-BJO110K-autoruns.arn`
-  - Autoruns snapshot archive in OLE Compound File format (`D0 CF 11 E0 ...` header).
-  - Serves as persistence/autostart evidence container.
+### Family And Objective
 
----
+- Strong attribution to AveMaria/Warzone (including explicit family strings and C2-domain correlation).
+- Primary intent is information theft with remote-control functionality.
 
-## Reconstructed Behavior Highlights
+### Credential Theft And Collection
 
-- Macro-triggered execution starts at `Document_open`.
-- Obfuscated VBA assembles hidden PowerShell execution.
-- PowerShell downloader attempts multiple fallback URLs.
-- Payload is saved as `%USERPROFILE%\637.exe` and executed after size validation.
-- Static binary evidence indicates capability for:
-  - Registry interaction and potential Run-key persistence.
-  - Network retrieval of additional modules.
-  - Process/memory operations associated with advanced execution behaviors.
-- Dynamic telemetry (FakeNet/Wireshark/Procmon/Regshot) supports runtime correlation.
+- Browser targets include Chromium and Firefox credential stores.
+- Mail-related targets include Outlook, Thunderbird, and Foxmail artifacts.
+- Windows credential collection is supported through vault-related APIs.
 
----
+### Keylogging Behavior
 
-## IOC Snapshot (From Collected Artifacts)
+- Captures special keys, alphanumeric input, and key names for unhandled keys.
+- Tags logs with active window title for contextual exfiltration value.
+- Uses conditional title logging to reduce noise and improve operator usability.
 
-### Domains / Network Targets
+### Evasion And Operational Behavior
 
-- `tresor2020.ddns.net`
-- `laclinika.com`
-- `thechasermart.com`
-- `zamusicport.com`
-- `zaloshop.net`
-- `www.leatherbyd.com`
-- `5.206.225.104`
+- Anti-analysis patterns include sleep delays and debugger checks.
+- Dynamic API resolution behavior is consistent with static-analysis evasion.
+- Command patterns include delayed execution and self-delete style logic.
 
-### Filenames / Paths
+### Persistence And System Changes
 
-- `%USERPROFILE%\637.exe`
-- `Software\Microsoft\Windows\CurrentVersion\Run\`
-- `\System32\cmd.exe`
+- Persistence-related intent appears in strings and registry-oriented behavior.
+- In this run, Regshot and Autoruns did not show clear new startup artifacts, suggesting possible conditional or hidden persistence logic.
 
----
+### Network Findings
 
-## Screenshots Status
+- Repeated DNS traffic to tresor2020.ddns.net from svchost.exe context was observed.
+- C2 reachability in the lab was constrained by the controlled environment (destination-unreachable responses).
 
-No image assets are currently present in this repository (`.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.svg` were not found), so there are no ready-to-embed screenshots yet.
+### Maldoc Findings
 
-If you want to visually enhance this README, the best screenshots to add are:
+- The Word document is an obfuscated dropper.
+- Document_open is the execution trigger.
+- WMI process creation is used to execute encoded PowerShell stealthily.
 
-1. `olevba` macro table and deobfuscation output.
-2. FakeNet DNS callbacks (`tresor2020.ddns.net`).
-3. Wireshark stream or endpoint summary.
-4. Procmon filtered events around payload execution.
-5. IDA view showing `URLDownloadToFileW` + registry calls.
+## Safety Note
 
-Recommended folder for future assets: `assets/screenshots/`
-
----
+All artifacts should be handled only in isolated analysis environments.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for details.
+This project is distributed under the MIT License. See [LICENSE](LICENSE).
