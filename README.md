@@ -40,10 +40,6 @@ Outcome: extracted indicators and behavior cues for registry modification, C2 co
 Tools: Process Monitor, Process Explorer, Regshot, Autoruns.
 Outcome: observed registry and filesystem activity (including AppData staging paths and network-related registry changes), high internal thread activity, and no obvious child-process chain in this run.
 
-<p align="center">
-  <img src="assets/process_monitor.png" alt="Process Monitor runtime events" width="68%" />
-</p>
-
 4. Network and C2 correlation.
 Tools: FakeNet, Wireshark, VirusTotal.
 Outcome: repeated DNS callbacks to tresor2020.ddns.net (svchost.exe context) and failed C2 session establishment in the lab (ICMP destination unreachable behavior).
@@ -63,10 +59,6 @@ Outcome: identified key translation routines, active window title capture, condi
 6. Malicious document execution-chain reconstruction.
 Tools: ExifTool, oleid, oletimes, oledump.py, olevba, ViperMonkey, deobfuscated PowerShell analysis.
 Outcome: Document_open auto-exec, obfuscated string assembly of hidden PowerShell, WMI process creation via winmgmts:Win32_Process, and second-stage payload download/execution (637.exe).
-
-<p align="center">
-  <img src="assets/owersheill%20-w%20hidden%20-en%20cmu.png" alt="Obfuscated PowerShell string fragments" width="46%" />
-</p>
 
 ## Findings
 
