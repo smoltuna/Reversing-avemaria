@@ -1,8 +1,5 @@
 # Malware Analysis Report
 
-**Authors:** Edoardo Bazzotti (VR518747), Simone Xiao (VR519027)
-**Course:** Codice Malevolo 2024/2025
-**Date:** 2025-06-30
 
 <p align="center">
   <img src="https://img.shields.io/badge/Family-AveMaria%20%2F%20Warzone-0B132B?style=for-the-badge" alt="family badge" />
@@ -11,6 +8,52 @@
 </p>
 
 English translation of the original Italian report ([`report/full-report.pdf`](report/full-report.pdf)). Extracted indicators are in [`IOCS.md`](IOCS.md); the maldoc YARA rule is in [`detections/ave-maria-warzone.yar`](detections/ave-maria-warzone.yar); raw evidence lives under [`evidence/`](evidence/).
+
+## At a glance
+
+| | |
+|---|---|
+| **Family** | AveMaria / Warzone RAT — a commercial remote-access Trojan focused on information theft |
+| **Delivery** | Malicious Word 97-2003 document (dropper) |
+| **Primary C2** | `tresor2020[.]ddns[.]net` — beaconed via injected `svchost.exe`; confirmed on VirusTotal |
+| **Secondary C2** | `5.206.225[.]104` — serves Mozilla NSS DLLs used to decrypt Firefox credentials |
+| **Dropper hosts** | 5 compromised WordPress sites, tried in failover order |
+| **Second-stage payload** | `%USERPROFILE%\637.exe` (executed only if ≥ 23,512 bytes) |
+| **Capabilities** | Credential theft (browsers, mail clients, Windows Vault), keylogging with active-window context, RDP tampering (multi-session), code injection |
+| **Standout tricks** | (1) WMI-based process spawn from Word — breaks the `winword.exe → powershell.exe` parent-child chain. (2) Split-delimiter string obfuscation to hide `winmgmts:Win32_Process`. (3) Traffic surfaces from a legitimate `svchost.exe`, not from the RAT process itself. |
+
+## Attack chain
+
+```mermaid
+flowchart LR
+    A["Word .doc<br/>opened"] -->|Document_open<br/>AutoExec| B["VBA macro<br/>(3 obfuscated modules)"]
+    B -->|GetObject<br/>winmgmts:Win32_Process| C["wmiprvse.exe"]
+    C -->|powershell -w hidden -en| D["PowerShell"]
+    D -->|Downloads from<br/>5 WordPress hosts| E["637.exe<br/>%USERPROFILE%"]
+    E -->|Executes if ≥ 23,512 B| F["AveMaria RAT"]
+    F -->|Injects code| G["svchost.exe<br/>PID 2108"]
+    G -->|DNS beacon| H(("tresor2020<br/>.ddns.net"))
+    F -.->|Fetches NSS libs<br/>at runtime| I(("5.206.225.104"))
+    F -->|Writes keylog| J["%APPDATA%\Microsoft Vision\<br/>DD-MM-YYYY_HH.MM.SS"]
+```
+
+1. **User opens the malicious Word document.** `Document_open` auto-runs, kicking off the VBA macro spread across three obfuscated modules (`Pvncafg`, `Llzjsomymu`, `Qnrnsagenrr`).
+2. **The macro reassembles a hidden WMI string.** Fragments joined via a custom delimiter (`8**hjK%%%^^hjkHSB3423DFFF`) rebuild `winmgmts:Win32_Process`. The macro then calls `.Create` on the WMI object, which spawns PowerShell as a child of `wmiprvse.exe` — sidestepping any rule that watches for `winword.exe → powershell.exe`.
+3. **The hidden PowerShell downloads the second stage.** Invoked with `-w hidden -en <base64>`, it iterates through five compromised WordPress hosts, writes `637.exe` to the user's profile folder, and executes it only if the download is at least 23,512 bytes (filtering out HTTP error pages).
+4. **`637.exe` is the AveMaria RAT.** It injects code into `svchost.exe` (PID 2108) so that all C2 traffic surfaces from a signed Microsoft binary. DNS callbacks go to `tresor2020.ddns.net` at regular intervals; Mozilla NSS libraries are pulled at runtime from `5.206.225.104` to decrypt Firefox credentials on disk.
+5. **Keystrokes are logged with context.** The keylogger (`sub_407966` in IDA) captures each keypress, tags it with the active window title, and writes to a per-session file under `%APPDATA%\Microsoft Vision\` — writing the title only when it changes, so the log reads as a stream of *"which app, then what was typed"*.
+
+## Toolchain
+
+| Phase | Tools |
+|---|---|
+| PE static triage | Exeinfo PE, PEiD, PEStudio, `strings`, YARA |
+| Host dynamic behavior | Process Monitor, Process Explorer, Regshot, Autoruns |
+| Network | FakeNet-NG, Wireshark, VirusTotal |
+| Reverse engineering | IDA Freeware |
+| Maldoc static | ExifTool, `oleid`, `oletimes`, `oledump.py`, YARA |
+| Maldoc dynamic / macro | `olevba --reveal --deobf`, ViperMonkey |
+| Sandbox | Isolated Windows VM with FakeNet intercepting outbound traffic |
 
 ## Contents
 
