@@ -25,16 +25,12 @@ English translation of the original Italian report ([`report/full-report.pdf`](r
 ## Attack chain
 
 ```mermaid
-flowchart LR
-    A["Word .doc<br/>opened"] -->|Document_open<br/>AutoExec| B["VBA macro<br/>(3 obfuscated modules)"]
-    B -->|GetObject<br/>winmgmts:Win32_Process| C["wmiprvse.exe"]
-    C -->|powershell -w hidden -en| D["PowerShell"]
-    D -->|Downloads from<br/>5 WordPress hosts| E["637.exe<br/>%USERPROFILE%"]
-    E -->|Executes if ≥ 23,512 B| F["AveMaria RAT"]
-    F -->|Injects code| G["svchost.exe<br/>PID 2108"]
-    G -->|DNS beacon| H(("tresor2020<br/>.ddns.net"))
-    F -.->|Fetches NSS libs<br/>at runtime| I(("5.206.225.104"))
-    F -->|Writes keylog| J["%APPDATA%\Microsoft Vision\<br/>DD-MM-YYYY_HH.MM.SS"]
+flowchart TB
+    A["<b>1.</b> Word document opened<br/><i>Document_open AutoExec fires</i>"]
+      --> B["<b>2.</b> VBA macro spawns PowerShell via WMI<br/><i>winmgmts:Win32_Process — bypasses Office's parent-child chain</i>"]
+    B --> C["<b>3.</b> Hidden PowerShell downloads 637.exe<br/><i>5 compromised WordPress hosts, size gate ≥ 23,512 B</i>"]
+    C --> D["<b>4.</b> 637.exe is the AveMaria RAT<br/><i>injects code into svchost.exe (PID 2108)</i>"]
+    D --> E["<b>5.</b> C2 beacon + keylog<br/><i>tresor2020.ddns.net · %APPDATA%\\Microsoft Vision\\</i>"]
 ```
 
 1. **User opens the malicious Word document.** `Document_open` auto-runs, kicking off the VBA macro spread across three obfuscated modules (`Pvncafg`, `Llzjsomymu`, `Qnrnsagenrr`).
